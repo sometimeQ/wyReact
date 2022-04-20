@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
+// import './assets/css/reset.css';
+// 更改别名后的
+import '@/assets/css/reset.css'; 
+
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

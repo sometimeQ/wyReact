@@ -68,3 +68,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+### 
+使用到的库
+重置样式: npm install --save normalize.css
+更改别名: npm i @craco/craco@7.0.0-alpha.0; 防止路径很深，不好取;  // react-scripts  别名启动, craco package.json里面
+
