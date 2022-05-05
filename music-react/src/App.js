@@ -1,11 +1,18 @@
-import './App.css';
+import React, { memo } from 'react';
+import Router from "./router";
 
+import { HashRouter } from 'react-router-dom';
+import LWAppHeader from './components/app-header';
+import LWAppFooter from './components/app-footer';
 
-import React, { memo } from 'react'
 
 const App = memo(() => {
   return (
-    <div>App</div>
+    <HashRouter>
+      <LWAppHeader></LWAppHeader>
+      <Router></Router>
+      <LWAppFooter></LWAppFooter>
+    </HashRouter>
   )
 })
 
