@@ -1,9 +1,7 @@
 
 /* 引入重置样式的css */
 @import "~normalize.css";
-/* @import "~antd/dist/antd.css"; */
-
-/* @import "~ant-design/icons"; */
+@import "~antd/dist/antd.css";
 
 /* 样式重置 */
 body,
@@ -101,7 +99,6 @@ button {
 }
 
 /* 精灵图 */
-
 .sprite_01 {
     background: url(../img/sprite_01.png) no-repeat 0 9999px;
 }
