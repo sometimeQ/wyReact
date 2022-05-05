@@ -8,8 +8,8 @@ module.exports = {
     webpack: {
         alias: {
             "@" : resolve('src'), // 统一找src目录下面的路径
-            "compoments": resolve('src/compoments'),
-            "assets": resolve('src/assets')
+            "components": resolve('src/components'),
+            // "assets": resolve('src/assets')
         }
     }
 }

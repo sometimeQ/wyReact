@@ -75,4 +75,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 使用到的库
 重置样式: npm install --save normalize.css
 更改别名: npm i @craco/craco@7.0.0-alpha.0; 防止路径很深，不好取;  // react-scripts  别名启动, craco package.json里面
+路由: npm install react-router-dom
+roure路由统一配置管理: npm install react-router-config
+不冲突的css样式:  npm install --save styled-components, vscode-styled-components
+antd样式: npm install antd
+antd图标: npm install @ant-design/icons
+redux管理依赖: npm install redux react-redux redux-thuk;  react-redux: ==> 共享数据，conect, provider; redux-thuk ==> 进行异步请求
+安装插件: redux-devTool; project Manager
+优化内存的数据结构: npm install immutable
+优化合并reducer库: npm install redux-immutable
+
 
