@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div`
     height: 75px;
     font-size: 14px;
-    color: #ffffff;
+    color: #fff;
     background-color: #242424;
     
     /* 内容 */
@@ -72,6 +72,7 @@ export const HeaderLeft  = styled.div`
                 /* 底部激活的图标采用子绝父相 */
                 &.active .icon {
                     position: absolute;
+                    display: inline-block;
                     width: 12px;
                     height: 7px;
                     /* 居中 */

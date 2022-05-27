@@ -4,7 +4,7 @@ import { useRoutes, Navigate } from 'react-router-dom';
 
 // 懒加载路由，节约性能
 const LWDiscover = React.lazy(() => import("@/pages/discover"));
-const LWRecommend = React.lazy(() => import("@/pages/discover/c-page/recommend"));
+const LWRecommend = React.lazy(() => import("@/pages/discover/sub-cpns/recommend"));
 const LWFriend = React.lazy(_ => import("@/pages/friend"));
 const LWMine = React.lazy(_ => import("@/pages/mine"));
 

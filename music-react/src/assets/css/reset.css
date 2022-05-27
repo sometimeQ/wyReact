@@ -1,7 +1,6 @@
-
-/* 引入重置样式的css */
 @import "~normalize.css";
 @import "~antd/dist/antd.css";
+/* @import "~ant-design/icons"; */
 
 /* 样式重置 */
 body,
@@ -83,8 +82,19 @@ button {
 
 /* 超出内容自动显示省略号 */
 .text-nowrap {
-    white-space: nowrap;
     text-overflow: ellipsis;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    
+    display: -moz-box;
+    -moz-line-clamp: 3;
+    -moz-box-orient: vertical;
+    
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
     overflow: hidden;
 }
 
@@ -99,6 +109,7 @@ button {
 }
 
 /* 精灵图 */
+
 .sprite_01 {
     background: url(../img/sprite_01.png) no-repeat 0 9999px;
 }

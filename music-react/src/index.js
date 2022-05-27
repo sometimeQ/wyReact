@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+// import './index.css';
 
 // import './assets/css/reset.css';
 // 更改别名后的,引入全局的样式

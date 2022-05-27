@@ -83,6 +83,18 @@ antd图标: npm install @ant-design/icons
 redux管理依赖: npm install redux react-redux redux-thuk;  react-redux: ==> 共享数据，conect, provider; redux-thuk ==> 进行异步请求
 安装插件: redux-devTool; project Manager
 优化内存的数据结构: npm install immutable
-优化合并reducer库: npm install redux-immutable
+优化合并reducer库: npm install --save immutable redux-immutable
+hooks: npm install --save redux react-redux
+
+
+
+
+
+
+
+background-position； 
+
+flex-wrap
+
 
 
