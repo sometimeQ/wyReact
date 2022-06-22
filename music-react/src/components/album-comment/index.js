@@ -1,9 +1,16 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
 
-const AlbumComment = memo(() => {
-  return (
-    <div>AlbumComment</div>
-  )
+import { AlbumCommentWrapper } from './style';
+
+const AlbumComment = memo((props) => {
+    // redux
+
+    return (
+        <AlbumCommentWrapper>
+             {/* 头部 */}
+             {/* 尾部 */}
+        </AlbumCommentWrapper>
+    )
 })
 
 export default AlbumComment
