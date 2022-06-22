@@ -5,6 +5,9 @@ import { useRoutes, Navigate } from 'react-router-dom';
 // 懒加载路由，节约性能
 const LWDiscover = React.lazy(() => import("@/pages/discover"));
 const LWRecommend = React.lazy(() => import("@/pages/discover/sub-cpns/recommend"));
+const HYRanking = React.lazy(() => import("@/pages/discover/sub-cpns/ranking"));
+const LWSongs = React.lazy(() => import('@/pages/discover/sub-cpns/songs'));
+
 const LWFriend = React.lazy(_ => import("@/pages/friend"));
 const LWMine = React.lazy(_ => import("@/pages/mine"));
 
@@ -32,8 +35,16 @@ const routes = [
                 // }
             },
             {
-                path: '/discover/recommend',
+                path: '/discover/recommend', // 推荐
                 element: <LWRecommend />
+            },
+            {
+                path: '/discover/ranking', // 排行榜
+                element: <HYRanking />
+            },
+            {
+                path: '/discover/songs', // 歌单
+                element: <LWSongs />
             }
         ]
     },

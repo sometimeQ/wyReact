@@ -7,6 +7,7 @@ import {
     CHANGE_UP_RANKING,
     CHANGE_NEW_RANKING,
     CHANGE_ORIGIN_RANKING,
+    CHANGE_SETTLE_SONGER
 } from './constants';
 
 
@@ -19,11 +20,13 @@ const defaultState = Map({
     // 榜单
     upRanking: {},
     newRanking: {},
-    originRanking: {}
+    originRanking: {},
+
+    settleSings: []
 });
 
 
-// 函数
+// reducer，用于处理对应Action的的纯函数
 export default function reducer(state = defaultState, action) {
     switch (action.type) {
         case CHANGE_TOP_BANNERS:
@@ -39,7 +42,8 @@ export default function reducer(state = defaultState, action) {
             return state.set('newRanking', action.newRanking);
         case CHANGE_ORIGIN_RANKING:
             return state.set('originRanking', action.originRanking);
-        
+        case CHANGE_SETTLE_SONGER:
+            return state.set('settleSings', action.settleSings)
         default:
             return state;
     }

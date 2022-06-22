@@ -30,3 +30,76 @@ export function getCount(count) {
     }
 }
 
+/**
+ * 解析URL链接中的参数
+ * @param {*} url 
+ */
+export function getQueryParam(url) {
+    const decodeURL = decodeURI(url);
+    let Object = {};
+    try {
+        for (let item of decodeURL.split('&')) {
+            const parseExp = /(\w*)=(\w*)/;
+            const result = parseExp.exec(item);
+            Object[result[1]] = result[2];
+        }
+    } catch (error) {
+        console.log('解析URL链接中的参数失败');
+    }
+    return Object;
+}
+
+/**
+ * 时间戳转换时间格式
+ * @param {*} time 
+ * @param {*} fmt 
+ * @returns 
+ */
+export function formatDate(time, fmt) {
+    let date = new Date(time);
+
+    if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    let o = {
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds()
+    };
+    for (let k in o) {
+        if (new RegExp(`(${k})`).test(fmt)) {
+            let str = o[k] + '';
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : padLeftZero(str));
+        }
+    }
+    return fmt;
+};
+
+/**
+ * 拼接
+ * @param {*} str 
+ * @returns 
+ */
+function padLeftZero(str) {
+    return ('00' + str).substr(str.length);
+};
+
+/**
+ * 月
+ * @param {*} time 
+ * @returns 
+ */
+export function formatMonthDay(time) {
+    return formatDate(time, "MM月dd日");
+}
+
+/**
+ * 时间
+ * @param {*} time 
+ * @returns 
+ */
+export function formatMinuteSecond(time) {
+    return formatDate(time, "mm:ss");
+}

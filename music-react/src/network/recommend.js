@@ -34,13 +34,38 @@ export function getNewAlbum(limit) {
 }
 
 /**
- * 榜单
+ * 所有榜单
  */
 export function getTopList(idx) {
     return network({
-        url: '/top/list',
+        // url: '/top/list',
+        url: '/toplist',
         params: {
-            idx: idx
+            idx: idx,
+        }
+    })
+}
+
+/**
+ * 榜单详情
+ */
+export function getAllTopDetail(id) {
+    return network({
+        url: '/toplist/detail',
+        params: {
+            id: id
+        }
+    })
+}
+
+export function getArtistList(type, area, initial) {
+    return network({
+        url: '/artist/list',
+        // type=1&area=96&initial=b
+        params: {
+            type: type,
+            area: area,
+            initial: initial
         }
     })
 }

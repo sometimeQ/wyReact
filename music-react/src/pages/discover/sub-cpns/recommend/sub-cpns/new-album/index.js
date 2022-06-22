@@ -32,6 +32,8 @@ const NewAlbum = memo(() => {
     // 走马灯轮播图展示两页
     const carouselArray = [0, 1];
     
+    console.log(newAlbums);
+    console.log("wan比");
     
     return (
         <NewAlbumWrapper>

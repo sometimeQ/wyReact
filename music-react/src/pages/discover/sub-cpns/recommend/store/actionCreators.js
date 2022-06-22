@@ -3,8 +3,15 @@ import {
     getTopBanners, 
     getHotRecommends,
     getNewAlbum,
-    getTopList
+    getTopList,
+    getAllTopDetail,
+    getArtistList
 } from "@/network/recommend";
+
+import {
+    getRankingList
+} from '@/network/ranking';
+
 // 常量
 import { 
     CHANGE_TOP_BANNERS,
@@ -12,7 +19,9 @@ import {
     CHANGE_NEW_ALBUM,
     CHANGE_UP_RANKING,
     CHANGE_NEW_RANKING,
-    CHANGE_ORIGIN_RANKING
+    CHANGE_ORIGIN_RANKING,
+    CHANGE_ALL_LIST,
+    CHANGE_SETTLE_SONGER
  } from "./constants";
 
 
@@ -31,7 +40,7 @@ const changeHotRecommendAction = (res) => ({
 // 新碟上架
 const changeNewAlbumAction = (res) => ({
     type: CHANGE_NEW_ALBUM,
-    newAlbums: res.data.albums
+    newAlbums: res.data.monthData
 });
 
 // 飙升榜
@@ -51,6 +60,19 @@ const changeOriginRankingAction = (res) => ({
     type: CHANGE_ORIGIN_RANKING,
     originRanking: res.data.playlist
 });
+
+// 所有的榜单\自定义key
+const changeAllRankingListAction = (res) => ({
+    type: CHANGE_ALL_LIST,
+    allRankingList: ''
+});
+
+const changeSettleSingsAction = (res) => ({
+    type: CHANGE_SETTLE_SONGER,
+    settleSings: res.data.artists
+
+})
+
 
 
 // 轮播图
@@ -80,8 +102,18 @@ export const getNewAlbumAction = (limit) => {
     return (dispatch) => {
         // 调取数据
         getNewAlbum(limit).then((res) => {
+            console.log(',,,,,,,,,,,,,,,');
+            console.log(res);
+            console.log('mmmmmmmmmmmmmmmm');
             dispatch(changeNewAlbumAction(res));
         })
+    }
+}
+
+// 所有的榜单
+export const getAllRankingList = (limit) => {
+    return (dispatch) => {
+        // 调取数据
     }
 }
 
@@ -92,24 +124,64 @@ export const getNewAlbumAction = (limit) => {
  * 1: 新歌榜接口
  * 2: 原创接口
  */ 
-export const getTopListAction = (idx) => {
+export const getRankingTypeList = (idx) => {
     return (dispatch) => {
-        // 调取网络接口
-        getTopList(idx).then((res) => {
-            console.log('新碟上架' + res);
+        // 调取网络请求接口
+        getRankingList(idx).then(res => {
+            console.log('1============== 1');
+            console.log(res);
+            console.log('2============== 2');
             switch (idx) {
-                case 0 :
+                case 19723756:
                     dispatch(changeUpRankingAction(res));
                     break;
-                case 2 :
+                case 3779629:
                     dispatch(changeNewRankingAction(res));
                     break;
-                case 3 :
+                case 2884035:
                     dispatch(changeOriginRankingAction(res));
                     break;
                 default:
                     break;
             }
+        })
+    }
+}
+
+// export const getTopListAction = (idx) => {
+//     return (dispatch) => {
+//         // 调取网络接口
+//         getTopList(idx).then((res) => {
+//             console.log('榜单接口');
+//             console.log(res);
+//             console.log('榜单完毕');
+//             switch (idx) {
+//                 case 0 :
+//                     dispatch(changeUpRankingAction(res));
+//                     break;
+//                 case 2 :
+//                     dispatch(changeNewRankingAction(res));
+//                     break;
+//                 case 3 :
+//                     dispatch(changeOriginRankingAction(res));
+//                     break;
+//                 default:
+//                     break;
+//             }
+//         })
+//     }
+// }
+
+/**
+ * 
+ * 
+ */
+export const getSettleSingers = () => {
+    return dispatch => {
+        // 获取网络请求 type=1&area=96&initial=b
+        getArtistList(1, 7, 'b').then(res => {
+            // console.log(res);
+            dispatch(changeSettleSingsAction(res));
         })
     }
 }
