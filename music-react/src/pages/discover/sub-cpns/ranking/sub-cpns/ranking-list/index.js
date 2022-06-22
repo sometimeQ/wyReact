@@ -85,6 +85,7 @@ const RankingList = memo(() => {
                 </tbody>
             </table>
         </div>
+        {/* 底部评论组件 */}
 
     </RankingListWrapper>
   )
