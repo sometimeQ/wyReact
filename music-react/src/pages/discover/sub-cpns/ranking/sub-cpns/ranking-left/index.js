@@ -7,6 +7,10 @@ import {
     changeCurrentIndex,
     getRightRankingList
 } from '../../store/actionCreators';
+import {
+    getAlbumCommentAction,
+    getAlbumHotCommentAction
+} from '@/pages/discover/sub-cpns/album/store/actionCreators';
 import { LeftRankingWrapper } from './style';
 
 const LeftRanking = memo(() => {
@@ -35,11 +39,11 @@ const LeftRanking = memo(() => {
         // 取出当前的id
         const id = (state.topList[currentIndex] && state.topList[currentIndex].id);
         if (!id) return;
-        // if (defaultPlaylistId !== undefined) {
-        //     dispatch(getRightRankingList(defaultPlaylistId));
-        // } else {
-            dispatch(getRightRankingList(id));
-        // }
+
+        // 点击左边的列表显示右边
+        dispatch(getRightRankingList(id));
+        // 显示对应的精彩评论, 热门评论登陆后会显示的hotArray这个数组
+        dispatch(getAlbumCommentAction(id));
     }, [dispatch, currentIndex, state])
 
     // 其他逻辑
@@ -50,8 +54,9 @@ const LeftRanking = memo(() => {
         // 请求右边的数据,拿到当然索引的id
         const id = state.topList[currentIndex].id;
         dispatch(getRightRankingList(id));
-
     }
+
+
 
     return (
         <LeftRankingWrapper>

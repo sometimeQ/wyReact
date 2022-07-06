@@ -111,13 +111,85 @@ export const HeaderRight = styled.div`
     font-size: 13px;
     width: 30%;
 
-    .search {
-        width: 158px;
-        height: 32px;
-        /* 圆角 */
-        border-radius: 2rem;
-        font-size: 12px;
+    /* 输入框 */
+    .search-wrapper {
+        position: relative;
+        /* 输入框 */
+        .search {
+            width: 158px;
+            height: 32px;
+            /* 圆角 */
+            border-radius: 2rem;
+            font-size: 12px;
+        }
+
+        /* 下拉框 */
+        .down-slider {
+            /* 定位下拉框 */
+            position: absolute;
+            top: 36px;
+            left: 0;
+            right: 0;
+            width: 237px;
+            z-index: 999;
+            border: 1px solid #bebebe;
+            border-radius: 4px;
+            background-color:  #fff;
+            box-shadow: 0 4px 7px #555;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+
+            /* 搜索下拉框头部 */
+            .search-header {
+                height: 35px;
+                .header-title  {
+                    display: inline-block;
+                    padding-top: 10px;
+                    padding-left: 10px;
+                    color: #000;
+                }
+            }
+
+            /* 内容 */
+            .content {
+                height: 100%;
+                display: flex;
+                border: 1px solid rgb(183, 183, 187);
+
+                .left {
+                    width: 65px;
+                    padding-top: 10px;
+                    border-bottom: none;
+                    /* 单曲 */
+                    .song {
+                        color: #ccc;
+                        /* margin-left: 20px; */
+                        text-align: center;
+                        margin-left: 5px;
+                    }
+                }
+
+                /* 主体 */
+                .main { 
+                    height: 100%;
+                    border-left: 1px solid #ccc;
+                    font-size: 16px;
+                    .item {
+                        margin: 10px 10px;
+                        color: #000;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 168px;
+                        height: 35px;
+                        line-height: 35px;
+                        cursor: pointer;
+                        /* text-indent: 8px; */
+                    }
+                }
+            }
+        }
     }
+    
 
     .button-center {
         /* width: 90px; */

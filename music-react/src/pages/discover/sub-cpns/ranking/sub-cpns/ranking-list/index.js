@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import ThemeHeaderSong from '@/components/theme-header-song';
+import PlayListComment from '../../../../components/play-list-comment';
 import {  
   getSizeImage, 
   formatMinuteSecond
@@ -10,10 +11,16 @@ import { useSelector } from 'react-redux';
 const RankingList = memo(() => {
   // redux
   const state = useSelector((state) => ({
-    playList: state.getIn(['ranking', 'playList'])
+    playList: state.getIn(['ranking', 'playList']),
+    albumComment: state.getIn(['album', 'albumComment'])
   }));
 
+  // 歌单列表数据
   const tracks = state.playList.tracks || [];
+  // 评论列表数据
+  const comments = state.albumComment;
+  // 该歌单id
+  const playListId = state.playList.id;
 
   return (
     <RankingListWrapper>
@@ -86,6 +93,14 @@ const RankingList = memo(() => {
             </table>
         </div>
         {/* 底部评论组件 */}
+      <PlayListComment
+        albumComment={comments}
+        playListId={playListId}>
+
+      </PlayListComment>
+        {/* <AlbumComment>
+          
+        </AlbumComment> */}
 
     </RankingListWrapper>
   )

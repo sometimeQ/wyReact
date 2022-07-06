@@ -1,7 +1,8 @@
 // 网络请求接口
 import { 
     getTopList,
-    getRankingList
+    getRankingList,
+    getLog
 } from '@/network/ranking';
 // 常量
 import *as actionTypes from './constants';
@@ -30,10 +31,19 @@ export const getTops = (res) => {
     return dispath => {
         // 开始调取网络接口
         getTopList().then(res => {
-            console.log(res);
-            console.log('///////////////////');
+            // console.log(res);
+            // console.log('///////////////////');
             // 调用自定义的action
             dispath(changeTopListAction(res));
+        })
+    }
+}
+
+export const getLogin = (res) => {
+    return dispath => {
+        getLog().then(res => {
+            // console.log(res);
+            // console.log('///////////////////');
         })
     }
 }
@@ -43,6 +53,9 @@ export const getRightRankingList = (id) => {
     return dispath => {
         // 调取网络请求接口
         getRankingList(id).then(res => {
+            console.log('/////////////////// 1');
+            console.log(res);
+            console.log('/////////////////// 2');
             dispath(changePlayListAction(res))
         })
     }

@@ -17,9 +17,9 @@ const RankingHeader = memo(() => {
     playList: state.getIn(['ranking', 'playList']),
   }));
 
-  console.log('???????????????');
-  console.log(state.playList);
-  console.log('XXXXXXXXXXXXXXXXX');
+  // console.log('???????????????');
+  // console.log(state.playList);
+  // console.log('XXXXXXXXXXXXXXXXX');
 
   return (
     <RankingHeaderWrapper>

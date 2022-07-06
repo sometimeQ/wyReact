@@ -9,4 +9,4 @@ export default function network(config) {
     });
 
     return instance(config);
-}
+} 

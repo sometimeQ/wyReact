@@ -99,6 +99,7 @@ export const RankingListWrapper = styled.div`
                         height: 17px;
                         background-position: 0 -103px;
                         margin-right: 10px;
+                        cursor: pointer;
                     }
 
                     /* 名字 */
@@ -124,8 +125,12 @@ export const RankingListWrapper = styled.div`
                         .btn {
                             width: 18px;
                             height: 16px;
+                            line-height: 16px;
+                            margin-top: 2px;
+                            text-align: center;
                             display: inline-block;
                             cursor: pointer;
+                            box-sizing: border-box;
                         }
 
                         /* + 号 */
@@ -153,7 +158,11 @@ export const RankingListWrapper = styled.div`
                         }
                     }
 
-                    &:hover {
+                    
+                }
+            }
+
+            tr:hover {
                         .dr {
                             display: none;
                         }
@@ -162,9 +171,6 @@ export const RankingListWrapper = styled.div`
                             display: inline-block;
                         }
                     }
-                }
-            }
-
         }
     }
 `;

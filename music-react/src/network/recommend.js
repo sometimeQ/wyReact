@@ -69,3 +69,21 @@ export function getArtistList(type, area, initial) {
         }
     })
 }
+
+/**
+ * 首页搜索数据
+ * @param {*} keywords 
+ * @param {*} limit 
+ * @param {*} type 
+ * @returns 
+ */
+export function getSearchSongData(keywords, limit = 7, type = 1) {
+    return network({
+        url: '/search',
+        params: {
+            keywords,
+            limit,
+            type,
+        }
+    })
+}

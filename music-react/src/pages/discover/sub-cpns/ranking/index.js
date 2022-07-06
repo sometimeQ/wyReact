@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 
-import { getTops } from './store/actionCreators';
+import { getTops, getLogin } from './store/actionCreators';
 
 import LeftRanking from './sub-cpns/ranking-left';
 import RankingHeader from './sub-cpns/ranking-header';
@@ -25,6 +25,7 @@ const Ranking = memo(() => {
   // hooks, 数据请求
   useEffect(() => {
     dispatch(getTops());
+    // dispatch(getLogin());
     // // 默认选中第一个
     // dispatch(getRightRankingList(defaultPlaylistId));
   }, [dispatch]);
