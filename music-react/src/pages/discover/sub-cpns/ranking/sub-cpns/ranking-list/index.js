@@ -18,7 +18,7 @@ const RankingList = memo(() => {
   // 歌单列表数据
   const tracks = state.playList.tracks || [];
   // 评论列表数据
-  const comments = state.albumComment;
+  const comments = state.albumComment || [];
   // 该歌单id
   const playListId = state.playList.id;
 
@@ -93,7 +93,7 @@ const RankingList = memo(() => {
             </table>
         </div>
         {/* 底部评论组件 */}
-      <PlayListComment
+       <PlayListComment
         albumComment={comments}
         playListId={playListId}>
 

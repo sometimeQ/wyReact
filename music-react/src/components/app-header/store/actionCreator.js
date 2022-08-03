@@ -17,8 +17,8 @@ export const changeFocusStateAction = (state) => ({
 export const getSearchSongListAction = (searchStr) => {
     return (dispatch) => {
         getSearchSongData(searchStr).then((res) => {
-            console.log('????????? x');
-            console.log(res.data.result);
+            // console.log('????????? x');
+            // console.log(res.data.result);
             const songList = res.data && res.data.result.songs
             dispatch(changeSearchSongListAction(songList));
         })

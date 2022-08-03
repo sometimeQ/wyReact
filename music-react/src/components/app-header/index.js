@@ -43,7 +43,7 @@ const LWAppHeader = memo(() => {
 
   // 函数逻辑
   const showSelectItem = (item, index) => {
-    console.log(item);
+    // console.log(item);
     if (index < 3) {
       return (
         // 路由跳转、必须在外层嵌套HashRouter activeclasssname='active'  默认为active

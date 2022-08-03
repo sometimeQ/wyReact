@@ -13,15 +13,22 @@ import { SongsCoverWrapper } from './style';
 export default memo(function SongsCover(props) {
   // 接收传递过来的数据
   const { item } = props;
+  // console.log('item  ' + item);
+  // const navigate = useNavigate();
 
   const showBy = item.copywriter && item.creator && item.creator.nickname ? `by ${item.copywriter && item.creator && item.creator.nickname}` : '';
+
+  const  axx = (itemId) => {
+
+  }
 
   return (
     <SongsCoverWrapper>
       <div className='cover-top'>
         <img src={getSizeImage(item.picUrl || item.coverImgUrl, 140)} alt={item.name}></img>
         {/* 跳转路由，传递参数，斜着的白色的图片 */}
-        <a className="msk sprite_covor" href={`/playlist?id=${item.id}`} title={item.name}> </a>
+        {/* <a className="msk sprite_covor" href={`/playlist?id=${item.id}`} title={item.name}> </a> */}
+        <a className="msk sprite_covor" href={`#/discover/playlist?id=${item.id}`} title={item.name}> </a>
         {/* 图片上面的遮罩阴影 */}
         <div className='cover'>
           <div className='info sprite_covor'>

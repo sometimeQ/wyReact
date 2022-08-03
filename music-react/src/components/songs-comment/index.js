@@ -4,14 +4,21 @@ import { getSizeImage, timestampFormat, getCount } from '@/utils/format-utils';
 import { AlbumCommentWrapper } from './style';
 import CustomInput from '../comment-input';
 
+
+
 const SongsComment = memo((props) => {
     // 接收传递过来的数据 
-    const { item } = props;
+    const { item, index, onReply, clear } = props;
+
+    // console.log(item);
+    // console.log('???????????????????');
 
     // redux
     // const [inputValue, setInputValue] = useState('');
     const [contentValue, setContentValue] = useState('');
-    const [hasDisplay, setHasDisplay] = useState(false);
+
+    // 保存上一次点击的e
+    const [prevIndex, setPrevIndex] = useState(0);
 
     // 内容回复里面的内容
     const beReplieds = item.beReplied || [];
@@ -24,12 +31,26 @@ const SongsComment = memo((props) => {
     // 点赞数量
     const showLikedCount = getCount(item.likedCount);
 
-    const onReply = (item) => {
-        // console.log('xxxxxxxxxxxxxxxxxxxx ' + item.user.nickname);
-        setContentValue(item.user.nickname + ':');
-        setHasDisplay(!hasDisplay);
-    }
+    // const handlerClickOne = (v, btns) => {
+    //     console.log('怎么没有返回值的呢' + ' ' + v.value);
+    //     for (let i = 0; i < btns.length; i++) {
+    //         // btns[i].style.backgroundColor = '';
+    //         console.log(btns[i].style.backgroundColor = ' ' + 'kkkkkkk');
+    //     }
+    //     // this.style.backgroundColor = 'blue';
+    // }
 
+    // 回复按钮的点击事件
+    const onReplys = (item, index) => {
+        // console.log('onReplys 点击啦回复按钮' + ' ' + item.user.nickname + '  ' + index);
+
+        // 清空文字
+        
+
+        onReply(item, index);
+            
+    }
+  
     function onClickLike(item) {
         // console.log('点赞啦呀  ~~~~~~~ ' + item.user.userId);
     }
@@ -103,13 +124,16 @@ const SongsComment = memo((props) => {
                                 </a>
                                 {/* 分割线 */}
                                 <span className='step'>|</span>
-                                {/* 回复 */}
-                                <a href='#!' target='_' onClick={() => onReply(item)}>回复</a>
+                                {/* 回复, 传递给父组件 */}
+                                <a target='_' onClick={() => onReplys(item, index)}>回复</a>
                             </div>
                         </div>
                         {/* 内容 里面的回复 功能区域 */}
                         {
-                            hasDisplay && <div className='content-reply'>
+                            <button 
+                                className={'content-reply'}
+                                style={{ display: (item.checked ? 'inline-block' : 'none') }}
+                                >
                                 <div className='f-brka'>
                                     <div>
                                         <span className='darra'>
@@ -120,6 +144,7 @@ const SongsComment = memo((props) => {
                                     <div className='reply'>
                                         <CustomInput
                                             placeholder=''
+                                            clear={clear}
                                             aValue={contentValue}
                                             // value={inputValue}
                                             maxLength={140}
@@ -128,7 +153,7 @@ const SongsComment = memo((props) => {
                                     </div>
                                 </div>
 
-                            </div>
+                            </button>
                         }
                     </div>
                 </div>

@@ -5,6 +5,8 @@ const SongOperationBar = memo((props) => {
     // 接收参数
     const { favorTitle, shareTitle, downloadTitle, commentTitle } = props;
 
+    // console.log('MMMMMMMMMMMMMMMMMMMMMMMMMM');
+
     return (
         <OperationBarWrapper>
             {/* 播放 */}

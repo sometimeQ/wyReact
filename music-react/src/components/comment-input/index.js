@@ -1,20 +1,25 @@
 
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { Input } from 'antd';
+import { debounce } from "@/utils/format-utils";
 import EmojiPicker from '../emoji-smart';
 import { CustomInputWrapper } from './style';
 
 // 全局保存
 let tempTextAreaData = '';
-let cache = {
-    lastIndex: 0,
-    offset: 0
-};
+
 
 const CustomInput = memo((props) => {
     // 接收数据
-    const { aValue, maxLength } = props;
+    const { aValue, maxLength, cWidth, idx = '', clear } = props;
+
+    let idClassx = idx.length > 0 ? idx : 'textarea';
+
+    // console.log(idClassx);
+    // console.log('??????????????');
+    // console.log(clear);
     
+    // 测试
     let atListArray = [
         '选择最近@的人或直接输入',
         '云音乐小秘书',
@@ -23,6 +28,8 @@ const CustomInput = memo((props) => {
         '网易云音乐'
     ];
 
+    const inputRef = useRef();
+
     // redux
     const [inputValue, setInputValue] = useState('');
     const [displayEmoji, setDisplayEmoji] = useState(false);
@@ -30,12 +37,16 @@ const CustomInput = memo((props) => {
     const [atList, setAtList] = useState(atListArray);
     const [keyWord, setKeyWord] = useState(false);
     const [dynamic, setDynamic] = useState();
+    const [dynamicBorderHeght, setDynamicBorderHeght] = useState(0);
 
-    // 记录是否显示状态
-    useEffect(() => {
-        
-    }, [inputValue])
-
+    // if (clear) {
+    //     console.log('准备清空啦');
+    //     // tempTextAreaData = '';
+    //     // setInputValue(tempTextAreaData);
+    //     if (!inputRef) return;
+    //     inputRef.current.resetFields();
+    // }
+  
 
     // hooks
     /*
@@ -69,6 +80,7 @@ const CustomInput = memo((props) => {
     const onChange = (e) => {
         console.log('Change:', e.target.value);
 
+        setDisplayEmoji(false);
         setInputValue(e.target.value);
         
         // 保存输入框初始值
@@ -83,12 +95,14 @@ const CustomInput = memo((props) => {
             // console.log('newStr' + '  ' + newStr);
 
             setKeyWord(tempStr);
-            setDisplayEmoji(false);
             setDisplayAt(true);
 
             // 过滤掉str,除掉value=4的一项，最终得到一个新的数组
             let newAtList = atListArray.filter(item => {
-                if (item.includes(tempStr)) return item
+                if (item.includes(tempStr)) {
+                    setDynamicBorderHeght(1);
+                    return item;
+                } 
             })
 
             // 重新渲染
@@ -107,7 +121,7 @@ const CustomInput = memo((props) => {
     const searchEmoji = (emoji) => {
         console.log(emoji.native);
         // 拿到dom
-        let dom = document.getElementById('textarea');
+        let dom = document.getElementById(idClassx);
         // 插入到文本输入框里面
         insertAtCursor(dom, emoji.native);
     }
@@ -117,29 +131,18 @@ const CustomInput = memo((props) => {
         setDisplayEmoji(false);
         setDisplayAt(true);
 
-        let dom = document.getElementById('textarea');
+        let dom = document.getElementById(idClassx);
         // 插入到文本输入框里面
         insertAtCursor(dom, '@');
     }
 
     const onAtMessage = (item) => {
         // console.log('点击啦At信息' + ' ' + item);
-        // 拼接
-        // tempTextAreaData += item;
-
-        // 赋值
-        // setInputValue(tempTextAreaData);
         setDisplayAt(false);
 
-        let dom = document.getElementById('textarea');
+        let dom = document.getElementById(idClassx);
         // 插入到文本输入框里面
         insertAtCursor(dom, item);
-
-
-        // // 计算字符串
-        // let cupText = textSize("11px", "Arial", tempTextAreaData);
-        // setDynamic(cupText);
-
     }
 
     // 评论功能
@@ -159,7 +162,7 @@ const CustomInput = memo((props) => {
      * @returns 
      */
     function textSize(fontSize, fontFamily, text) {
-        let div = document.getElementById("textarea");
+        let div = document.getElementById(idClassx);
         let w = div.clientWidth;    // 返回元素的总宽度
 
         let paddingValue = 20;
@@ -196,46 +199,73 @@ const CustomInput = memo((props) => {
         }
         result.height = parseFloat(window.getComputedStyle(span).height) - result.height;
 
+        // console.log('我来看康区别呢');
+        // console.log(span.offsetWidth);
+        // console.log(span.offsetHeight);
+
         return result;
     }
 
+    /**
+     * 插入标签字符等操作
+     * @param {*} myField 
+     * @param {*} emojiValue 
+     */
     const insertAtCursor = (myField, emojiValue) => {
-        // 代表了当前激活选中区，即高亮文本块，和/或文档中用户可执行某些操作的其它元素
-        if (document.selection) {
-            console.log('开始选择高亮');
-            // 激活光标
+    
 
-        } else if (myField.selectionStart || myField.selectionStart === '0') { // 光标处插入文字的代码
-            console.log('开始插入');
-            // MOZILLA/NETSCAPE support
-            const startPos = myField.selectionStart;
-            const endPos = myField.selectionEnd;
 
-            // 文字的:0 ~末尾 xxx1
-            const beforeValue = myField.value.substring(0, startPos);
-            // 输入框文字的结尾 0 
-            const afterValue = myField.value.substring(endPos, myField.value.length);
-            tempTextAreaData = beforeValue + emojiValue + afterValue;
-  
-            setInputValue(tempTextAreaData);
-            myField.selectionStart = startPos + emojiValue.length;
-            myField.selectionEnd = startPos + emojiValue.length;
-            myField.focus();
+        console.log('开始插入');
+        let position = getPositionForTextArea(myField); // 获取光标的位置
+        // 截取对应的字符串用于拼接emoji表情
+        const beforeValue = myField.value.substring(0, position.start);
+        const afterValue = myField.value.substring(position.end, myField.value.length);
 
-            console.log('打印光标的结束位置');
-            console.log(myField.selectionEnd);
+        // 拼接表情
+        tempTextAreaData = beforeValue + emojiValue + afterValue;
+        setInputValue(tempTextAreaData);
 
-        } else {
-            console.log('elese ...');
-            tempTextAreaData += emojiValue;
-            setInputValue(tempTextAreaData);
-            myField.focus();
-        }
+        console.log('position tempTextAreaData' + ' ' + position.start + '  ' + position.end + '  ' + tempTextAreaData);
+
+        // setFieldsValue方法是异步的
+        // 不加延时器就会发生光标还没插入文字呢 就已经把光标插入后的位置提前定位
+        setTimeout(() => {
+            setCursorPosition(myField, position.start + emojiValue.length);
+        }, 20);
+        
+        // 当然，如果是使用setstate改变输入框内容, 在回调里改变光标位置就不会出现这种问题
+        // setMessageState({ tempTextAreaData }, () => setCursorPosition(myField, position.start + emojiValue.length));
 
         // 计算当前字符串所在的位置
         let cupText = textSize("11px", "Arial", tempTextAreaData);
         setDynamic(cupText);
     }
+
+    // 获取光标的位置
+    const getPositionForTextArea = (ctrl) => {
+        // 获取光标位置
+        let CaretPos = {
+            start: 0,
+            end: 0
+        };
+
+        if (ctrl.selectionStart) { // Firefox support
+            CaretPos.start = ctrl.selectionStart;
+        }
+
+        if (ctrl.selectionEnd) {
+            CaretPos.end = ctrl.selectionEnd;
+        }
+        return (CaretPos);
+    };
+
+    // 聚焦输入框
+    const setCursorPosition = (elment, pos) => {
+        if (elment === undefined) return;
+        elment.focus();
+        elment.setSelectionRange(pos, pos);
+    };
+
 
     // 输入框模糊搜索
     /**
@@ -251,20 +281,37 @@ const CustomInput = memo((props) => {
         )
     }
 
+    // 其他逻辑
+    // 函数防抖进行优化
+    // 不同之处在于 oninput 事件在元素值发生变化是立即触发， onchange 在元素失去焦点时触发
+    const changeInput = debounce((target) => {
+        // 过滤空格
+        let value = target.value.trim();
+        if (value.length < 1) {
+            return
+        };
+
+    }, 400)
+
     return (
         <CustomInputWrapper>
             <div className='a-input'>
                 {/* 太坑了，默认值defaultValue 与 value只能二选一 */}
                  {
                  <Input.TextArea
-                    id='textarea'
+                    id={idClassx}
+                    ref={inputRef}
+                    style={{ height: (cWidth ? cWidth : '30px') }}
                     className='a-textarea'
                     placeholder={aValue}
                     // defaultValue={aValue}
                     value={inputValue}
                     bordered={false}
                     maxLength={maxLength}
-                    onChange={onChange} /> 
+                    onChange={onChange}
+                    // 事件在用户输入时触发
+                    onInput={({ target }) => changeInput(target)}
+                     /> 
                 }
 
                 {/* 底部@ emoji 评论按钮 字数 */}
@@ -284,7 +331,7 @@ const CustomInput = memo((props) => {
                         {/* @弹框选择器 */}
                         {/* <div className='pop-at'> */}
                             {
-                            displayAt  && inputValue.includes('@') && <div className="u-atlist" style={{ position: 'absolute', top: dynamic.height, left: dynamic.width }}>
+                            displayAt && inputValue.includes('@') && <div className="u-atlist" style={{ position: 'absolute', top: dynamic.height, left: dynamic.width, border: `${dynamicBorderHeght}px solid rgb(205, 205, 205)` }}>
                                     {
                                         atList.map((item, index) => {
                                             return (

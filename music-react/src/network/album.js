@@ -2,6 +2,19 @@ import network from "./network";
 
 
 /**
+ * 获取歌单详情（未登录状态只能获取不完整的歌单,登录后是完整的）
+ */
+export function getPlayListDetail(id) {
+    console.log(id);
+    return network({
+        url: "/playlist/detail",
+        params: {
+            id: id,
+        },
+    })
+}
+
+/**
  * 获取精彩评论
  * @param {*} id  排行榜 id
  * @param {*} limit  取出评论数量 , 默认为 20
@@ -37,4 +50,30 @@ export function getHotComment(id, type, limit = 20, offset = 0) {
             type: type
         }
     })
+}
+
+/**
+ * 获取相关歌单推荐
+ * @param {Number} id 歌单ID
+ */
+export function getRelatedPlayList(id) {
+    return network({
+        url: "/related/playlist",
+        params: {
+            id,
+        },
+    });
+}
+
+/**
+ * 获取歌单的所有收藏者
+ * @param {Number} id 歌单ID
+ */
+export function getPlayListSubscribers(id) {
+    return network({
+        url: "/playlist/subscribers",
+        params: {
+            id,
+        },
+    });
 }

@@ -101,6 +101,8 @@ export const AlbumCommentWrapper = styled.div`
 
         /* 底部回复的内容框等功能 */
         .content-reply {
+            display: none;
+            width: 100%;
             height: 100px;
             margin-top: 15px;
             /* 子绝父相 */
@@ -147,5 +149,7 @@ export const AlbumCommentWrapper = styled.div`
                 }
             }
         }
+
+       
     }
 `;

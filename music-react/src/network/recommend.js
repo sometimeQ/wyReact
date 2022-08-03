@@ -87,3 +87,30 @@ export function getSearchSongData(keywords, limit = 7, type = 1) {
         }
     })
 }
+
+/**
+ * 获取歌单信息
+ * @param {*} cat 分类，默认为全部
+ * @param {*} offset 偏移数量，用于分页 , 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+ * @param {*} limit 返回数量，默认为35
+ */
+export function getSongCategoryList(cat = '全部', offset = 0, limit = 35) {
+    return network({
+        url: '/top/playlist',
+        params: {
+            cat,
+            limit,
+            offset
+        }
+    })
+}
+
+/**
+ * 获取歌单分类,包含 category 信息
+ * @returns 
+ */
+export function getSongCategory() {
+    return network({
+        url: '/playlist/catlist'
+    })
+}

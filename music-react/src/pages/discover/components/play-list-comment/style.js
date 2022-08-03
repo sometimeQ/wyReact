@@ -2,6 +2,20 @@ import styled from "styled-components";
 
 export const PlayListCommentWrapper = styled.div`
     padding: 40px;
+
+    /* test */
+    .test-data-list {
+        .item {
+        line-height: 30px;
+         color: black;
+    }
+ 
+    .item-active {
+        color: red
+    }
+}
+
+
     /* 评论、数量、下划线 */
     .comment-title {
         display: flex;

@@ -53,9 +53,9 @@ export const getRightRankingList = (id) => {
     return dispath => {
         // 调取网络请求接口
         getRankingList(id).then(res => {
-            console.log('/////////////////// 1');
-            console.log(res);
-            console.log('/////////////////// 2');
+            // console.log('/////////////////// 1');
+            // console.log(res);
+            // console.log('/////////////////// 2');
             dispath(changePlayListAction(res))
         })
     }

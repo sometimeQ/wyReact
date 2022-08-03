@@ -7,9 +7,9 @@ import { getSizeImage } from '@/utils/format-utils';
  * 新碟上架组件
  */
 const AlbumCover = memo((props) => {
-    console.log('接收的新碟上架组件信息begin');
-    console.log(props);
-    console.log('接收的新碟上架组件信息over');
+    // console.log('接收的新碟上架组件信息begin');
+    // console.log(props);
+    // console.log('接收的新碟上架组件信息over');
 
     // 解构数据
     const { title, info, size = 130, width = 153, bacgroundpositon = "-845px", link = '' } = props;

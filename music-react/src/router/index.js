@@ -8,6 +8,14 @@ const LWRecommend = React.lazy(() => import("@/pages/discover/sub-cpns/recommend
 const HYRanking = React.lazy(() => import("@/pages/discover/sub-cpns/ranking"));
 const LWSongs = React.lazy(() => import('@/pages/discover/sub-cpns/songs'));
 
+// 歌单详情列表
+const LWPlayList = React.lazy(() => import('@/pages/discover/sub-cpns/playlist'));
+const LWDJRadio = React.lazy(() => import('@/pages/discover/sub-cpns/djradio/sub-cpns/djradio'));
+const LWDJRadio_Category = React.lazy(() => import('@/pages/discover/sub-cpns/djradio/sub-cpns/category'));
+
+// 歌手
+const LWArist = React.lazy(() => import('@/pages/discover/sub-cpns/artist'));
+
 const LWFriend = React.lazy(_ => import("@/pages/friend"));
 const LWMine = React.lazy(_ => import("@/pages/mine"));
 
@@ -30,9 +38,6 @@ const routes = [
                 path: '/discover',
                 expect: true,
                 element: <Navigate to='/discover/recommend'></Navigate>
-                // render: () => {
-                //     <Navigate to='/discover/recommend'></Navigate>
-                // }
             },
             {
                 path: '/discover/recommend', // 推荐
@@ -45,6 +50,22 @@ const routes = [
             {
                 path: '/discover/songs', // 歌单
                 element: <LWSongs />
+            },
+            {
+                path: "/discover/playlist", // 详情
+                element: <LWPlayList />
+            },
+            {
+                path: "/discover/djradio", // 文件夹名字保持一致
+                element: <LWDJRadio />
+            },
+            {
+                path: "/discover/djradio/category", // 电台分类进入
+                element: <LWDJRadio_Category />
+            },
+            {
+                path: "/discover/artist", // 歌手
+                element: <LWArist />
             }
         ]
     },

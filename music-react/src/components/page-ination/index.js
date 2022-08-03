@@ -12,6 +12,18 @@ import { Pagination } from 'antd';
 const LWPageInation = memo((props) => {
     const { current, pageSize, total, onChange } = props;
 
+    // 自定义页码结构 current 不能省略
+    function itemRender(current, type, originalElement) {
+        if (type === 'prev') {
+            return <button className="control prev"> &lt; 上一页</button>;
+        }
+        if (type === 'next') {
+            return <button className="control next">下一页 &gt;</button>;
+        }
+        return originalElement;
+    }
+
+
     /**
      * showSizeChanger: 是否展示 pageSize 切换器，当 total 大于 50 时默认为 true
      * current 当前页数
@@ -22,6 +34,7 @@ const LWPageInation = memo((props) => {
      */
     return (
         <Pagination 
+            itemRender={itemRender}
             showSizeChanger={false} 
             current={current}
             defaultCurrent={1}

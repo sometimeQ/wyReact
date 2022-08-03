@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom';
 
 const TopRanking = memo((props) => {
     // 传递够来的数据
-    const { info, link } = props;
+    const { info, link = '' } = props;
     const { tracks = [] } = info;
+
+    console.log( info);
 
     // hooks
     // const dispath = useDispatch();

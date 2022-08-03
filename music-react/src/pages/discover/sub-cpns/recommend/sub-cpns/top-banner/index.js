@@ -32,9 +32,9 @@ const TopBanner = memo(() => {
             setCurrentIndex(to);
         }, 0);
 
-        console.log(from);
-        console.log('------------');
-        console.log(to);
+        // console.log(from);
+        // console.log('------------');
+        // console.log(to);
 
     }, []); // [] ,依赖是否观察
 
@@ -54,7 +54,7 @@ const TopBanner = memo(() => {
                     <Carousel ref={bannerRef} autoplay="true" effect='fade' beforeChange={beforeChange}>
                       {
                           topBanners.map((item, index) => {
-                              const url = item.url || ` / song ? id =${item.encodeId}`;
+                              const url = item.url || `/song?id =${item.encodeId}`;
                               return(
                                   <div key={item.imageUrl}>
                                       <a href={url} target={item.url ? '_blank' : ''} rel="noreferrer">
