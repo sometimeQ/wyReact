@@ -6,6 +6,9 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getRankingTypeList } from '../../store/actionCreators';
 
 
+/**
+ * 排行榜
+ */
 const RecommendRanding = memo(() => {
     // 网络请求数据
     const dispatch = useDispatch();
@@ -23,7 +26,7 @@ const RecommendRanding = memo(() => {
     }), shallowEqual);
 
     const title = '榜单';
-    const moreLink = '/discover/ranking';
+    const moreLink = '#/discover/ranking';
     const links = [
         `/discover/ranking/?id=19723756`,
         `/discover/ranking/?id=3779629`,

@@ -102,7 +102,7 @@ export const getNewAlbumAction = (limit) => {
     return (dispatch) => {
         // 调取数据
         getNewAlbum(limit).then((res) => {
-            console.log(',,,,,,,,,,,,,,,');
+            console.log('新碟上架');
             console.log(res);
             console.log('mmmmmmmmmmmmmmmm');
             dispatch(changeNewAlbumAction(res));

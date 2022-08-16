@@ -1,5 +1,24 @@
 import network from "./network";
 
+/**
+ * 获取新碟上架列表。如需具体音乐信息需要调用获取专辑列表接口: /album
+ * @param {*} area
+ * @param {*} type
+ * @param {*} limit
+ * @param {*} offset
+ */
+export function getAlbumTop(area = "ALL", type = "new", limit = 50, offset = 0) {
+    return network({
+        url: "/top/album",
+        params: {
+            area,
+            type,
+            limit,
+            offset,
+        },
+    });
+}
+
 
 /**
  * 获取歌单详情（未登录状态只能获取不完整的歌单,登录后是完整的）

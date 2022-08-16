@@ -28,7 +28,8 @@ const NewAlbum = memo(() => {
 
     // 其他逻辑
     const title = '新碟上架';
-    const moreLink = '';
+    // ="/discover/album/
+    const moreLink = '#/discover/album/'; 
     // 走马灯轮播图展示两页
     const carouselArray = [0, 1];
     

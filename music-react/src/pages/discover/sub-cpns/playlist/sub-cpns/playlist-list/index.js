@@ -71,7 +71,9 @@ const PlayListSongs = memo(() => {
                                                 {/* 播放按钮 */}
                                                 <span className='play sprite_table'></span>
                                                 {/* 歌曲名字s */}
-                                                <span className='name'>{item.name}</span>
+                                                {/* <span className='name'>{item.name}</span> */}
+                                                {/* 跳转到歌曲详情列表 */}
+                                                <a href={`#/discover/song?id=${item.id}`}>{item.name}</a>
                                             </div>
                                         </td>
                                         {/* 时长 */}

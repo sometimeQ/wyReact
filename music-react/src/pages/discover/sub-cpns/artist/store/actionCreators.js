@@ -10,6 +10,8 @@ const changeTopPrtistsAction = (topPrtists) => ({
 export const getTopPrtistsAction = (limit, offset) => {
     return (dispatch) => {
         getTopPrtists(limit, offset).then((res) => {
+            console.log(res);
+            console.log('res  over');
             dispatch(changeTopPrtistsAction(res.data));
         });
     };

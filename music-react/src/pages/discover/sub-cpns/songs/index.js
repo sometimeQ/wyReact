@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import SongHeader from './sub-cpns/songs-header';
 import SongsCategory from './sub-cpns/songs-category';
 import SongsList from './sub-cpns/songs-list';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import {
   changeCurrentCategoryAction,
   getSongList,
@@ -22,19 +22,22 @@ const LWSongs = memo((props) => {
 
   // https://blog.csdn.net/qq_36946446/article/details/122617502
   // search 传递参数
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  console.log('searchParams' + ' ' + searchParams);
+  // const [searchParams, setSearchParams] = useSearchParams();
 
   // 获取跳转传递过来的数据, 路由传参
-  // const param = getQueryParam(props.location.search);
+  const location = useLocation();
+  const { pathname, search } = location;
+
+  let param = getQueryParam(pathname + search);
+
+  // console.log(param);
 
   // 是否显示分类
   const [isShow, setIsShow] = useState();
   // 分类
-  const [cat, setCat] = useState(searchParams.cat || '全部');
+  const [cat, setCat] = useState(param.cat || '全部');
   // 分页
-  const [nowPage, setNowPage] = useState(searchParams.page || 1);
+  const [nowPage, setNowPage] = useState(param.page || 1);
 
   // redux
   const dispatch = useDispatch();

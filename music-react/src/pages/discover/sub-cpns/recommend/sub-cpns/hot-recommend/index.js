@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import ThemeHeaderRCM from '@/components/theme-header-rcm'
+import ThemeHeader from '@/components/theme-header'
 import { getHotRecommendAction } from '../../store/actionCreators';
 import SongCover from '@/components/songs-cover';
 import { HOT_RECOMMEND_LIMIT } from '@/common/contants';
@@ -26,14 +26,16 @@ const HotRecommend = memo(() => {
   
   const title = '热门推荐';
   const titileArray = ['华语', '流行', '摇滚', '民谣', '电子'];
+  const linkUrl = '#/discover/songs/';
 
   return (
       <HotRecommendWrapper>
-          <ThemeHeaderRCM
-            title={title}
-            keywords={titileArray}
-            moreLink={''}
-          ></ThemeHeaderRCM>
+          <div className='header'>
+            <ThemeHeader
+              title={title}
+              keywords={titileArray}
+              moreLink={linkUrl} />
+          </div>
           {/* 歌曲列表 */}
           <HotRecommendSongsListWrapper>
                 {/* 列表数据传递 */}

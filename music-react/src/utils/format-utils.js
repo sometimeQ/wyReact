@@ -30,16 +30,22 @@ export function getCount(count) {
     }
 }
 
+export function getPlayUrl(id) {
+    return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+}
+
 /**
  * 解析URL链接中的参数
  * @param {*} url 
  */
 export function getQueryParam(url) {
-    const decodeURL = decodeURI(url);
+    let decodeURL = decodeURI(url);
+    // decodeURL = '/discover/songs/?cat=2222';
+    console.log(decodeURL);
     let Object = {};
     try {
         for (let item of decodeURL.split('&')) {
-            const parseExp = /(\w*)=(\w*)/;
+            const parseExp = /(\w*)=([^]*)/;
             const result = parseExp.exec(item);
             Object[result[1]] = result[2];
         }
@@ -51,8 +57,8 @@ export function getQueryParam(url) {
 
 /**
  * 时间戳 转换
- * @param {*} timestamp 
- * @returns 
+ * @param {*} timestamp
+ * @returns
  */
 export function timestampFormat(timestamp) {
     function zeroize(num) {

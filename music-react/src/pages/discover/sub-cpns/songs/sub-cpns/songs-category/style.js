@@ -10,6 +10,7 @@ export const SongsCategoryWrapper = styled.div`
     padding: 10px 10px;
     background-color: #fefefe;
     box-shadow: 0 0 10px 2px #d3d3d3;
+    z-index: 111 !important;
 
     /* 小三角符号 */
     .arrow {

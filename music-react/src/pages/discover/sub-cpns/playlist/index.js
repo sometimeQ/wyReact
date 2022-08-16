@@ -6,7 +6,6 @@ import PlayListComment from '../../components/play-list-comment'
 import PlayListSongs from './sub-cpns/playlist-list';
 import { getQueryParam } from "@/utils/format-utils";
 
-
 import {
     getPlayListCommentAction,
     getPlayListDetailAction,
@@ -18,7 +17,7 @@ import {
     PlayListRightWrapper,
     PlayListWrapper
  } from './style';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { shallowEqual, useDispatch } from 'react-redux';
 import PlayListHot from './sub-cpns/playlist-hot';
 
@@ -26,22 +25,30 @@ import PlayListHot from './sub-cpns/playlist-hot';
  * 歌单详情列表
  */
 const PlayList = memo((props) => {
+    console.log('什么情况');
     // 接收其他点击事件传递过来的参数
     const [searchParams, setSearchParams] = useSearchParams();
-    const param = getQueryParam(searchParams);
+
+    // 解析
+    const { pathname, search } = useLocation();
+    // console.log(lo);
+    let param = searchParams && getQueryParam(pathname + search);
     console.log(param.id);
     
     const dispach = useDispatch();
     useEffect(() => {
-        // 歌单信息
-        dispach(getPlayListDetailAction(param.id));
-        // 歌单评论
-        dispach(getPlayListCommentAction(param.id));
-        // 相关推荐
-        dispach(getRelatedPlayListAction(param.id));
-        // 喜欢这个歌单的人
-        dispach(getPlayListSubscribersAction(param.id));
-    }, [dispach]);
+        if (param.id) {
+            // 歌单信息
+            dispach(getPlayListDetailAction(param.id));
+            // 歌单评论
+            dispach(getPlayListCommentAction(param.id));
+            // 相关推荐
+            dispach(getRelatedPlayListAction(param.id));
+            // 喜欢这个歌单的人
+            dispach(getPlayListSubscribersAction(param.id));
+        }
+
+    }, [dispach, param.id]);
 
     
     

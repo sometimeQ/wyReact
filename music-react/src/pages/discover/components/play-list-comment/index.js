@@ -73,6 +73,9 @@ const PlayListComment = memo((props) => {
 
         // 切换调取数据
         if (playListId === undefined) return;
+        console.log('什么啦啦');
+        console.log(playListId);
+        console.log('end');
         dispatch(getAlbumCommentAction(playListId, pageSize, (page - 1) * pageSize));
     }
 

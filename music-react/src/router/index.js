@@ -8,13 +8,19 @@ const LWRecommend = React.lazy(() => import("@/pages/discover/sub-cpns/recommend
 const HYRanking = React.lazy(() => import("@/pages/discover/sub-cpns/ranking"));
 const LWSongs = React.lazy(() => import('@/pages/discover/sub-cpns/songs'));
 
+
 // 歌单详情列表
 const LWPlayList = React.lazy(() => import('@/pages/discover/sub-cpns/playlist'));
 const LWDJRadio = React.lazy(() => import('@/pages/discover/sub-cpns/djradio/sub-cpns/djradio'));
 const LWDJRadio_Category = React.lazy(() => import('@/pages/discover/sub-cpns/djradio/sub-cpns/category'));
 
+// 歌曲详情
+const LWPlayer = React.lazy(() => import("@/pages/discover/sub-cpns/player"));
+
 // 歌手
 const LWArist = React.lazy(() => import('@/pages/discover/sub-cpns/artist'));
+// 新碟上架
+const LWAlbum = React.lazy(() => import('@/pages/discover/sub-cpns/album'));
 
 const LWFriend = React.lazy(_ => import("@/pages/friend"));
 const LWMine = React.lazy(_ => import("@/pages/mine"));
@@ -52,7 +58,7 @@ const routes = [
                 element: <LWSongs />
             },
             {
-                path: "/discover/playlist", // 详情
+                path: "/discover/playlist", // 歌单详情
                 element: <LWPlayList />
             },
             {
@@ -64,11 +70,24 @@ const routes = [
                 element: <LWDJRadio_Category />
             },
             {
-                path: "/discover/artist", // 歌手
+                path: "/discover/artist/*", // 歌手、加*号是模糊匹配
                 element: <LWArist />
+            },
+            {
+                path: '/discover/album/*',
+                element: <LWAlbum /> // 新碟上架
+            },
+            {
+                path: '/discover/song', // 歌曲
+                // expect: true,
+                element: <LWPlayer />
             }
         ]
     },
+    // {
+    //     path: '/song/*', // 歌曲
+    //     element: <LWPlayer />
+    // },
     {
         path: '/friend',
         element: <LWFriend />,
