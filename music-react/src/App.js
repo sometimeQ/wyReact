@@ -23,7 +23,6 @@ const App = memo(() => {
           {/* 播放器 */}
           <AppPlayerBar></AppPlayerBar>
       </HashRouter>
- 
     </Provider>
   )
 })
